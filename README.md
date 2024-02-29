@@ -11,3 +11,7 @@ https://www.youtube.com/watch?v=DLGcwASUFRg
 - Add some customizations (e.g. stroke width, text size)
 
 ![alt text](https://github.com/MarcoMartiniano/CircularProgress/blob/main/circleprogressbar.png)
+
+
+
+To use CircularProgress with DragGestures click and drag the stroke.
