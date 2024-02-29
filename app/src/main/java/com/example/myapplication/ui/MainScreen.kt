@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,10 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.presentation.MainScreenViewModel
 import com.example.myapplication.uikit.components.CircularProgressCount
+import com.example.myapplication.uikit.components.CircularProgressGesture
 import com.example.myapplication.uikit.theme.Black
 import com.example.myapplication.uikit.theme.Gold
 import com.example.myapplication.uikit.theme.LowBlack
@@ -55,8 +59,9 @@ fun MainScreen(viewModel: MainScreenViewModel) {
             CircularProgressCount(
                 diameter = 80.dp,
                 initialValue = timerCountUp.value,
-                primaryColor = Gold,
-                secondaryColor = LowBlack,
+                insideCircleColor = LowBlack,
+                outsideCircleColor = Black,
+                strokeColor = Gold,
                 textColor = Black,
                 maxValue = time,
                 strokeSize = 0.13f,
@@ -99,8 +104,9 @@ fun MainScreen(viewModel: MainScreenViewModel) {
             CircularProgressCount(
                 diameter = 80.dp,
                 initialValue = timerCountDown.value,
-                primaryColor = Gold,
-                secondaryColor = LowBlack,
+                insideCircleColor = LowBlack,
+                outsideCircleColor = Color.LightGray,
+                strokeColor = Gold,
                 textColor = Black,
                 maxValue = time,
                 strokeSize = 0.13f,
@@ -137,9 +143,20 @@ fun MainScreen(viewModel: MainScreenViewModel) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val context = LocalContext.current
             Text(text = "CircularProgressWithGesture")
             Spacer(modifier = Modifier.height(12.dp))
-            //CircularProgressWithGesture
+            CircularProgressGesture(
+                diameter = 200.dp,
+                initialValue = 10,
+                insideCircleColor = Color.Gray,
+                outsideCircleColor = Color.DarkGray,
+                strokeColor = Color.Yellow,
+                textColor = Color.White,
+                onPositionChange = { position ->
+                    Toast.makeText(context, "Volume: $position %", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 }
